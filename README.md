@@ -8,6 +8,7 @@ Start by cloning the project. Tested and working in python 3.6
 To install the requirements run the command `pip install -r requirements`
 
 ## Running tests
+Start by installing requirements_dev.txt and run `pytest -vv --showlocals ./tests` to execute unit tests.
 
 ## Run from command line
  From the command line run `./hackernews --posts number_of_posts_to_dispay`

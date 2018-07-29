@@ -7,9 +7,9 @@ import json
 import argparse
 import sys
 import os
+from hnparse.core import extract
 
 def main():
-    from hnparse.core import extract
     parser = argparse.ArgumentParser(description='hackernews top posts extractor')
 
     parser.add_argument('--posts', '-p', help='specify the number of posts to show')
