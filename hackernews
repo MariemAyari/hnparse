@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""Print hacker news top posts in JSON format."""
+
+import json
+import argparse
+import sys
+import os
+
+def main():
+    from hnparse.core import extract
+    parser = argparse.ArgumentParser(description='hackernews top posts extractor')
+
+    parser.add_argument('--posts', '-p', help='specify the number of posts to show')
+    args = parser.parse_args()
+    if not args.posts:
+        n = int(os.environ.get("HN_POSTS", "30"))
+    else:
+        n = int(args.posts)
+
+    if n > 100:
+        print ('Error:Post numbers cannot be more than 100')
+        sys.exit()
+    nb_page = n//30
+    res = n%30
+    page=0
+    articles=[]
+    for i in range(1, nb_page+1):
+        page = i
+        nb_posts = 30
+        articles.append(extract(page, nb_posts))
+    if res != 0:
+        page = nb_page+1
+        articles.append(extract(page,res))
+    print(json.dumps(articles,indent=4))
+
+if __name__ == "__main__":
+    main()
